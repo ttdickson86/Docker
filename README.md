@@ -411,16 +411,20 @@ Once customized, the `docker-compose.yml` file is ready to be used for deploymen
 
 By customizing the `docker-compose.yml` file, you can tailor your application’s environment to fit your needs, ensuring consistency across development, testing, and production environments. Let me know if you need help with specific services or configurations! 🚀
 
-
+## FOLLOW UP
 
 How do I add a custom service to the docker-compose.yml file?
+
 Can you explain how to set environment variables in the docker-compose.yml?
+
 What are best practices for scaling the application with Docker Compose?
+
 How can I integrate a database with my project using Docker Compose?
+
 What tools can I use to monitor the application after deployment?
 
 
-To add a **custom service** to your `docker-compose.yml` file, follow these steps:
+## To add a **custom service** to your `docker-compose.yml` file, follow these steps:
 
 ---
 
@@ -564,3 +568,106 @@ services:
 ---
 
 By adding a custom service to your `docker-compose.yml`, you can easily integrate new components into your application workflow. Let me know if you need help with specific configurations! 🚀
+
+
+
+## To set **environment variables** in a `docker-compose.yml` file, you can use two main approaches: **inline variables** (directly in the YAML) or **external files** (via `env_file`). Below is a detailed explanation of both methods:
+
+---
+
+### **1. Inline Environment Variables**
+You can define environment variables directly in the `environment` key of a service. This is useful for simple or short-lived variables.
+
+#### **Example:**
+```yaml
+version: '3'
+services:
+  web:
+    image: nginx
+    ports:
+      - "80:80"
+    environment:
+      - KEY1=VALUE1
+      - KEY2=VALUE2
+```
+
+- **Explanation**:
+  - `KEY1=VALUE1` and `KEY2=VALUE2` are environment variables passed to the `nginx` container.
+  - These variables are available to the container's processes, such
+  as in a script or command: `${KEY1}`.
+
+---
+
+### **2. External Environment Files (`env_file`)**
+
+You can load environment variables from a `.env` file using the `env_file` key. This is useful for managing secrets or large sets of variables.
+
+#### **Step 1: Create a `.env` file**
+```env
+KEY1=VALUE1
+KEY2=VALUE2
+```
+
+#### **Step 2: Reference the file in `docker-compose.yml`**
+```yaml
+version: '3'
+services:
+  web:
+    image: nginx
+    ports:
+      - "80:80"
+    env_file:
+      - .env
+```
+
+- **Explanation**:
+  - The `env_file` directive tells Docker Compose to load variables from the `.env` file.
+  - You can also specify multiple files: `env_file: - .env - .env2`.
+
+#### **Optional: Override Variables**
+If you want to override a variable from the file, use the `override` keyword:
+```yaml
+env_file:
+  - .env
+  - override:
+      KEY1=OVERRIDDEN_VALUE
+```
+
+---
+
+### **3. Best Practices**
+- **Security**: Avoid exposing sensitive variables (e.g., passwords) in version-controlled repositories. Use `env_file` or secret management tools instead.
+- **Consistency**: Use `env_file` for shared variables across multiple services.
+- **Debugging**: Use `docker-compose env` to list all environment variables for a service.
+
+---
+
+### **4. Accessing Variables in the Container**
+Environment variables are accessible in the container via:
+```bash
+echo $KEY1
+```
+Or in scripts:
+```bash
+my_script.sh "${KEY1}"
+```
+
+---
+
+### **5. Example with a Custom Service**
+```yaml
+version: '3'
+services:
+  myapp:
+    image: myapp
+    ports:
+      - "8080:8080"
+    environment:
+      - ENV_VAR=custom-value
+    env_file:
+      - .env
+```
+
+---
+
+By using these methods, you can dynamically configure your containers with environment variables, making your application more flexible and secure. Let me know if you need help with specific use cases! 🚀
