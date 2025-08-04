@@ -18,7 +18,7 @@ To get started:
 3. Run `docker-compose up` to launch the application.  
 4. Explore the `docker-compose.yml` file to customize services, networks, and volumes as needed.  
 
-This project is a great starting point for developers looking to adopt containerization and streamline their workflow with Docker and Docker Compose. Let me know if you'd like help tailoring it to your specific use case! 🚀
+This project is a great starting point for developers looking to adopt containerization and streamline their workflow with Docker and Docker Compose.🚀
 
 
 
