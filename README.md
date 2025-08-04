@@ -206,7 +206,7 @@ will start an Nginx server, serving files from the `html` directory in your proj
 By following these steps, you can quickly test and deploy your application using Docker Compose. Let me know if you need help customizing the `docker-compose.yml` file! 🚀
 
 
-To customize the `docker-compose.yml` file for your specific application, you need to define the services, networks, and volumes that make up your application. Below is a step-by-step guide to help you customize the file based on your needs:
+## To customize the `docker-compose.yml` file for your specific application, you need to define the services, networks, and volumes that make up your application. Below is a step-by-step guide to help you customize the file based on your needs:
 
 ---
 
